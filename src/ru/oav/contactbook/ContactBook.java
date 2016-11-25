@@ -1,23 +1,36 @@
 package ru.oav.contactbook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by antonorlov on 18/11/16.
  */
 public class ContactBook {
 
-    public static Contact[] getContacts() {
-        Contact anton = new Contact();
-        anton.name = "Anton";
-        anton.lastName = "Orlov";
-        anton.number = "+79219518963";
+//    private Contact[] contacts = {
+//            new Contact("Anton", "Orlov", "+79219518963"),
+//            new Contact("Alex", "Grebenyuk", "+79219993322")
+//    };
 
-        Contact alex = new Contact();
-        alex.name = "Alex";
-        alex.lastName = "Grebenyuk";
-        alex.number = "79219993322";
+    private List<Contact> contacts = new ArrayList<Contact>();
 
-        return new Contact[]{anton, alex};
+    public ContactBook() {
+        contacts.add(new Contact("Anton", "Orlov", "+79219518963"));
+        contacts.add(new Contact("Alex", "Grebenyuk", "+79219993322"));
+    }
+
+//    public Contact[] getContacts() {
+//        return contacts;
+//    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
 
 
+    public void addContact(Contact contact) {
+        contacts.add(contact);
+//        System.out.println("Пока не умею");
     }
 }
