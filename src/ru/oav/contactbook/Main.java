@@ -12,7 +12,6 @@ public class Main {
         ContactBook contactBook = new ContactBook();
         Scanner scanner = new Scanner(System.in);
         showMenu();
-
         while (true) {
             String line = scanner.nextLine();
             if (line.equals("1")) {
