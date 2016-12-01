@@ -1,5 +1,9 @@
 package ru.oav.contactbook;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,19 +12,31 @@ import java.util.List;
  */
 public class ContactBook {
 
-    private List contacts = new ArrayList();
+    private List<Contact> contacts = new ArrayList();
+
+
+    private String fileName = "/Users/antonorlov/Documents/ann/contact_book/contacts.txt";
 
     public ContactBook() {
-        contacts.add(new Contact(
-                "Иван",
-                "Швайков",
-                "+79210001122"
-        ));
-        contacts.add(new Contact(
-                "Егор",
-                "Токмаков",
-                "+79210007122"
-        ));
+        try {
+            List<String> strings = Files.readAllLines(Paths.get(fileName));
+            for (String line : strings) {
+               Contact c =  convertLine(line);
+               contacts.add(c);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Contact convertLine(String line) {
+        String[] split = line.split(",");
+        Contact c = new Contact(split[0], split[1], split[2]);
+        return c;
+    }
+
+    private String convertContact(Contact contact){
+        return contact.name + "," + contact.lastName +"," + contact.number +"\n";
     }
 
     public List getContacts() {
@@ -29,5 +45,12 @@ public class ContactBook {
 
     public void addContact(Contact contact) {
         contacts.add(contact);
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName))) {
+            for (Contact c : contacts) {
+                writer.write(convertContact(c));
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
