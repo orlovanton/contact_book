@@ -1,6 +1,5 @@
 package ru.oav.contactbook;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -15,7 +14,13 @@ public class Main {
         while (true) {
             String line = scanner.nextLine();
             if (line.equals("1")) {
-                System.out.println(Arrays.asList(contactBook.getContacts()));
+                for (Contact contact : contactBook.getContacts()) {
+                    System.out.println(contact.name + " "
+                            + contact.lastName + "\n"
+                            + contact.number);
+
+                    System.out.println("-----------");
+                }
             } else if (line.equals("3")) {
                 System.out.println("Завершение работы...");
                 System.exit(0);
@@ -33,30 +38,22 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         Contact contact = new Contact();
-        System.out.println("Введите имя");
 
-        while (true) {
-            String line = scanner.nextLine();
-            contact.name = line;
-            break;
-        }
+        System.out.println("Введите имя");
+        String line = scanner.nextLine();
+        contact.name = line;
 
         System.out.println("Введите фамилию");
-
-        while (true) {
-            String line = scanner.nextLine();
-            contact.lastName = line;
-            break;
-        }
+        line = scanner.nextLine();
+        contact.lastName = line;
 
         System.out.println("Введите телефон");
 
-        while (true) {
-            String line = scanner.nextLine();
-            contact.number = line;
-            break;
-        }
+        line = scanner.nextLine();
+        contact.number = line;
+
         book.addContact(contact);
+
         System.out.println("---------------");
         System.out.println("Контакт добавлен");
         System.out.println("---------------");

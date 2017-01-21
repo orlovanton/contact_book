@@ -39,7 +39,7 @@ public class ContactBook {
         return contact.name + "," + contact.lastName +"," + contact.number +"\n";
     }
 
-    public List getContacts() {
+    public List<Contact> getContacts() {
         return contacts;
     }
 
