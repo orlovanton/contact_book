@@ -8,25 +8,30 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        ContactBook contactBook = new ContactBook();
+        ContactBookService service = new ContactBookService();
+
         Scanner scanner = new Scanner(System.in);
         showMenu();
         while (true) {
             String line = scanner.nextLine();
             if (line.equals("1")) {
-                for (Contact contact : contactBook.getContacts()) {
+                for (Contact contact : service.getContactBook().contacts) {
                     System.out.println(contact.name + " "
                             + contact.lastName + "\n"
                             + contact.number);
 
                     System.out.println("-----------");
                 }
-            } else if (line.equals("3")) {
+            } else if (line.equals("4")) {
                 System.out.println("Завершение работы...");
                 System.exit(0);
             } else if (line.equals("2")) {
-                addContact(contactBook);
+                addContact(service);
                 showMenu();
+            } else if (line.equals("3")) {
+                System.out.println("Введите имя для удаления");
+                line = scanner.nextLine();
+                service.deleteContact(line);
             } else {
                 System.out.println("Неизвестная команда... \nЗавершение работы...");
                 System.exit(0);
@@ -34,7 +39,7 @@ public class Main {
         }
     }
 
-    private static void addContact(ContactBook book) {
+    private static void addContact(ContactBookService service ) {
         Scanner scanner = new Scanner(System.in);
 
         Contact contact = new Contact();
@@ -52,7 +57,7 @@ public class Main {
         line = scanner.nextLine();
         contact.number = line;
 
-        book.addContact(contact);
+        service.addContact(contact);
 
         System.out.println("---------------");
         System.out.println("Контакт добавлен");
@@ -64,6 +69,7 @@ public class Main {
         System.out.println("Команды: \n");
         System.out.print("1.Все контакты \n");
         System.out.print("2.Добавить контакт\n");
-        System.out.print("3.Выход \n");
+        System.out.print("3.Удалить контакт\n");
+        System.out.print("4.Выход \n");
     }
 }
