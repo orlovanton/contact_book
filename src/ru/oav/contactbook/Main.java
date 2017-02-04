@@ -1,5 +1,6 @@
 package ru.oav.contactbook;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -14,16 +15,20 @@ public class Main {
         while (true) {
             String line = scanner.nextLine();
             if (line.equals("1")) {
-                for (Contact contact : contactBook.getContacts()) {
-                    System.out.println(contact.name + " "
-                            + contact.lastName + "\n"
-                            + contact.number);
-
-                    System.out.println("-----------");
-                }
-            } else if (line.equals("3")) {
+                printContacts(contactBook);
+            } else if (line.equals("4")) {
                 System.out.println("Завершение работы...");
                 System.exit(0);
+            } else if (line.equals("3")) {
+                System.out.println("Выберите контакт для удаления");
+                printContacts(contactBook);
+                System.out.println("Для отмены введите 0");
+                String index = scanner.nextLine();
+                if (!index.equals("0")) {
+                    Integer integer = Integer.valueOf(index);
+                    contactBook.deleteContact(integer - 1);
+                }
+                showMenu();
             } else if (line.equals("2")) {
                 addContact(contactBook);
                 showMenu();
@@ -32,6 +37,22 @@ public class Main {
                 System.exit(0);
             }
         }
+    }
+
+    /**
+     * Печатаем все контакты
+     * @param contactBook
+     */
+    private static void printContacts(ContactBook contactBook) {
+        List<Contact> contacts = contactBook.getContacts();
+        for (int i = 0; i < contacts.size(); i++) {
+            Contact contact = contacts.get(i);
+            System.out.println(i + 1 + " - " + contact.name + " "
+                    + contact.lastName + "\n"
+                    + contact.number);
+            System.out.println("-----------");
+        }
+
     }
 
     private static void addContact(ContactBook book) {
@@ -64,6 +85,7 @@ public class Main {
         System.out.println("Команды: \n");
         System.out.print("1.Все контакты \n");
         System.out.print("2.Добавить контакт\n");
-        System.out.print("3.Выход \n");
+        System.out.print("3.Удалить контакт\n");
+        System.out.print("4.Выход \n");
     }
 }

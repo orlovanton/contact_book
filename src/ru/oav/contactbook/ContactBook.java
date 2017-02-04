@@ -53,4 +53,19 @@ public class ContactBook {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Удаление контакта
+     * @param index - индекс контакта в коллекции. Начинается с 0
+     */
+    public void deleteContact(int index){
+        contacts.remove(index);
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName))) {
+            for (Contact c : contacts) {
+                writer.write(convertContact(c));
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
