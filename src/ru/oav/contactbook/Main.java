@@ -43,7 +43,7 @@ public class Main {
      * Печатаем все контакты
      * @param contactBook
      */
-    private static void printContacts(ContactBook contactBook) {
+    public static void printContacts(ContactBook contactBook) {
         List<Contact> contacts = contactBook.getContacts();
         for (int i = 0; i < contacts.size(); i++) {
             Contact contact = contacts.get(i);
