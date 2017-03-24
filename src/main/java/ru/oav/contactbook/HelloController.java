@@ -8,7 +8,7 @@ import java.util.List;
 @RestController
 public class HelloController {
 
-    @RequestMapping("/")
+    @RequestMapping("/hello/")
     public String index() {
         ContactBook contactBook = new ContactBook();
 
