@@ -5,6 +5,26 @@
     <title>Title</title>
 </head>
 <body>
-<span th:text="${number}"></span> Енотов
+<table border="1">
+    <thead>
+    <tr>
+        <td>#</td>
+        <td>Имя, Фамилия</td>
+        <td>Телефон</td>
+        <td>Действие</td>
+    </tr>
+    </thead>
+    <tr th:each="contact,iterationStatus : ${contacts}">
+        <td th:text="${iterationStatus.count}"></td>
+        <td>
+            <span th:text="${contact.name}"></span>
+            <span th:text="${contact.lastName}"></span>
+        </td>
+        <td th:text="${contact.number}">number</td>
+        <td>
+            <a th:href="@{/delete/{index}(index=${iterationStatus.count})}">Удалить</a>
+        </td>
+    </tr>
+</table>
 </body>
 </html>

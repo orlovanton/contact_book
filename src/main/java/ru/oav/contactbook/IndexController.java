@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Random;
+import java.util.List;
 
 /**
  * Created by antonorlov on 24/03/2017.
@@ -15,11 +15,9 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model) {
 
-
-        Random random = new Random();
-        int number = random.nextInt(10);
-
-        model.addAttribute("number", number);
+        ContactBook contactBook = new ContactBook();
+        List<Contact> contacts = contactBook.getContacts();
+        model.addAttribute("contacts",contacts);
 
         return "index";
     }

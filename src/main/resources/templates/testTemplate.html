@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<style>
+    .box{
+        border: 1px solid red;
+        padding: 1em;
+        margin: 1em;
+    }
+</style>
+<body>
+<h1 th:text="${str}"></h1>
+
+<div class="box">
+
+    Имя: <b th:text="${racoon.name}"></b>
+    Вид: <b th:text="${racoon.type}"></b>
+
+</div>
+
+<p th:each="f123,iterationStatus : ${food}">
+    <span th:text="${f123}"></span> <br/>
+</p>
+
+
+</body>
+</html>
